@@ -1,0 +1,44 @@
+<%- include('../partials/header')%>
+
+    <section class="container">
+        <div class="row">
+            <div class="col">
+                <div class="row mt-5">
+                    <div class="col-6">
+                        <h1>Funcionários</h1>
+                    </div>
+                    <div class="col-6">
+                        <a class="btn btn-primary" href="/cadastrarFuncionario">Inserir novo funcionário</a>
+                    </div>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome do Funcionário</th>
+                            <th>Cargo do Funcionário</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% funcionarios.forEach(function(funcionario){%>
+                            <tr>
+                                <td>
+                                    <%= funcionario.nome_funcionario %>
+                                </td>
+                                <td>
+                                    <%= funcionario.cargo_funcionario %>
+                                </td>
+                                <td>
+                                    <a href="/editarCadastro/<%= funcionario.id_funcionario%>"
+                                        class="btn btn-warning">Editar Cadastro</a>
+                                    <a href="/excluirFuncionario/<%= funcionario.id_funcionario%>"
+                                        class="btn btn-danger">Excluir funcionário</a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <%- include('../partials/footer')%>

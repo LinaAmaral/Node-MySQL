@@ -1,0 +1,27 @@
+<%- include("../partials/header")%>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="mt-5">Alterar Cadastro</h1>
+                <form action="/editarCadastro" method="POST">
+                    <div class="form-group">
+                        <label for="nome_funcionario">Nome</label>
+                        <input class="form-control" type="text" id="nome_funcionario" name="nome_funcionario"
+                            value="<%=funcionario.nome_funcionario%>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cargo_funcionario">Cargo</label>
+                        <select class="form-control" id="cargo_funcionario" name="cargo_funcionario"
+                            value="<%=funcionario.cargo_funcionario%>">
+                            <option value="adm">adm</option>
+                            <option value="caixa">caixa</option>
+                        </select>
+                    </div>
+                    <input type="hidden" name="id_funcionario" value="<%= funcionario.id_funcionario %>">
+                    <button type="submit" class="btn btn-primary">Alterar Cadastro</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <%- include("../partials/footer")%>

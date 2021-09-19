@@ -1,0 +1,23 @@
+<%- include("../partials/header")%>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="mt-5">Logar</h1>
+                <form action="/logar" method="POST">
+                    <div class="form-group">
+                        <label for="nome_funcionario">Nome</label>
+                        <input class="form-control" type="text" id="nome_funcionario" name="nome_funcionario">
+                    </div>
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <input type="text" class="form-control" id="senha" name="senha">
+                    </div>
+
+                     <button type="submit" class="btn btn-primary">Logar</button>
+                     <a href="/" class="btn btn-success">Voltar</a>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+<%- include("../partials/footer")%>
