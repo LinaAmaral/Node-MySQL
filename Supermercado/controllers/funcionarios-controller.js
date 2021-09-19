@@ -44,7 +44,6 @@ exports.editarCadastro_get = (req, res) => {
     });
 };
 exports.editarCadastro_post = (req, res) => {
-    console.log(req.body.nome_funcionario +" - "+ req.body.cargo_funcionario)
     var sql = `UPDATE funcionarios set nome_funcionario='${req.body.nome_funcionario}', cargo_funcionario='${req.body.cargo_funcionario}' where id_funcionario = ${req.body.id_funcionario}`;
     db.query(sql, (err, result) => {
         if (err) throw err;

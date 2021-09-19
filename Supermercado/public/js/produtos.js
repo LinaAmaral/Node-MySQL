@@ -3,16 +3,8 @@ function FinalizarCompra() {
     $('input:checked').each(function () {
         ids_produtos.push($(this).val());
     });
-    console.log(ids_produtos)
     redirectPost('/finalizarCompra', { ids_produtos: ids_produtos });
-    // $.ajax({
-    //     type: "POST",
-    //     data: { lista_produtos: lista_produtos },
-    //     url: "/finalizarCompra",
-    //     success: function (msg) {
-    //         console.log(msg)
-    //     }
-    // });
+
 };
 
 function redirectPost(url, data) {
@@ -29,3 +21,9 @@ function redirectPost(url, data) {
     }
     form.submit();
 }
+
+
+$(window).on('load', function () {
+    if( $("#modal").length)
+        $('#compra_finalizada').modal('show');
+});

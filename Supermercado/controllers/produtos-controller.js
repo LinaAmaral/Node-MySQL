@@ -14,10 +14,15 @@ exports.cadastrarProduto_post = (req, res) => {
     });
 };
 exports.produtos_get = (req, res) => {
+    let ids_produtos_comprados = null;
+
+    if (req.query.ids_produtos) {
+        ids_produtos_comprados = req.query.ids_produtos.split(",").map(id => parseInt(id));
+    }
     var sql = `SELECT * from produtos`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        res.render("./views/pages/produtos", { item: result });
+        res.render("./views/pages/produtos", { produtos: result, produtos_comprados: ids_produtos_comprados });
     });
 };
 exports.deletarProduto = (req, res) => {
@@ -30,9 +35,8 @@ exports.deletarProduto = (req, res) => {
 exports.editarProduto_get = (req, res) => {
     var sql = `SELECT * from produtos where id_produto = ${req.params.id}`;
     db.query(sql, (err, result) => {
-        console.log(result);
         if (err) throw err;
-        res.render("./views/pages/formEditarProduto", { item: result[0] })
+        res.render("./views/pages/formEditarProduto", { produto: result[0] })
     });
 };
 exports.editarProduto_post = (req, res) => {
@@ -43,28 +47,22 @@ exports.editarProduto_post = (req, res) => {
     });
 };
 exports.finalizarCompra = (req, res) => {
-    let total_compra = 0;
-    if(req.body.ids_produtos.length > 0){
-        req.body.ids_produtos.split(",")
-            .map(id => parseInt(id))
-            .forEach(id => {
-                var sql = `SELECT quantidade, valor_unitario from produtos where id_produto = ${id}`;
+
+    if (req.body.ids_produtos.length > 0) {
+        req.body.ids_produtos.split(",").map(id => parseInt(id)).forEach(id => {
+            var sql = `SELECT quantidade, valor_unitario from produtos where id_produto = ${id}`;
+            db.query(sql, (err, result) => {
+                if (err) throw err;
+                quantidade = result[0].quantidade;
+                quantidade = quantidade - 1;
+                var sql = `UPDATE produtos set quantidade= ${quantidade} where id_produto = ${id}`;
                 db.query(sql, (err, result) => {
                     if (err) throw err;
-    
-                    quantidade = result[0].quantidade;
-                    quantidade = quantidade - 1;
-    
-                    valor = result[0].valor_unitario;
-                    total_compra = total_compra + valor;
-                    console.log("total compra dentro " + total_compra)
-    
-                    var sql = `UPDATE produtos set quantidade= ${quantidade} where id_produto = ${id}`;
-                    db.query(sql, (err, result) => {
-                        if (err) throw err;
-                    });
                 });
             });
-    }
-    res.redirect("/produtos")
+        });
+    };
+    res.redirect("/produtos?ids_produtos=" + req.body.ids_produtos)
 };
+
+

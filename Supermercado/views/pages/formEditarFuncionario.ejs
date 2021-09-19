@@ -12,10 +12,15 @@
 
                     <div class="form-group">
                         <label for="cargo_funcionario">Cargo</label>
-                        <select class="form-control" id="cargo_funcionario" name="cargo_funcionario"
-                            value="<%=funcionario.cargo_funcionario%>">
-                            <option value="adm">adm</option>
-                            <option value="caixa">caixa</option>
+                        <select class="form-control" id="cargo_funcionario" name="cargo_funcionario">
+                            <%
+                            var options = [ "adm", "caixa"];
+                            for ( var i = 0; i < options.length; i++ )
+                            {
+                                var selected = ( funcionario.cargo_funcionario == options[i]) ? "selected" : "";
+                                %><option value="<%=options[ i ] %>" <%=selected %>><%=options[i] %></option><%
+                            }
+                            %>
                         </select>
                     </div>
                     <input type="hidden" name="id_funcionario" value="<%= funcionario.id_funcionario %>">

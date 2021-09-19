@@ -6,11 +6,11 @@
                 <form action="/editarProduto" method="POST">
                     <div class="form-group">
                         <label for="nome">Nome</label>
-                        <input class="form-control" type="text" id="nome" name="nome_produto" value="<%=item.nome_produto%>">
+                        <input class="form-control" type="text" id="nome" name="nome_produto" value="<%=produto.nome_produto%>">
                     </div>
                     <div class="form-group">
                         <label for="quantidade">Quantidade em estoque</label>
-                        <input type="number" class="form-control" id="quantidade" name="quantidade" value="<%=item.quantidade%>">
+                        <input type="number" class="form-control" id="quantidade" name="quantidade" value="<%=produto.quantidade%>">
                     </div>
                     <!-- <div class="form-group">
                     <label for="data_validade">Data de validade</label>
@@ -18,9 +18,9 @@
                 </div> -->
                     <div class="form-group">
                         <label for="valor_unitario">Preço Unitário</label>
-                        <input type="number" class="form-control" id="valor_unitario" name="valor_unitario" value="<%=item.valor_unitario%>">
+                        <input type="number" class="form-control" id="valor_unitario" name="valor_unitario" value="<%=produto.valor_unitario%>">
                     </div>
-                    <input type="hidden" name="id_produto" value="<%= item.id_produto %>">
+                    <input type="hidden" name="id_produto" value="<%= produto.id_produto %>">
                     <button type="submit" class="btn btn-primary">Salvar</button>
                 </form>
             </div>
